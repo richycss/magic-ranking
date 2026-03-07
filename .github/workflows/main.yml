@@ -1,4 +1,36 @@
-- name: Ejecutar Script
+name: Actualizar Ranking
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Esto da permiso extra para guardar el HTML
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar librerías
+        run: pip install requests
+
+      - name: Ejecutar Script
         env:
-          MAGIC_TOKEN: ${{ secrets.MAGIC_TOKEN }} # Esto inyecta el secreto
+          MAGIC_TOKEN: ${{ secrets.MAGIC_TOKEN }}
         run: python main.py
+
+      - name: Guardar cambios
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Ranking actualizado" || exit 0
+          git push
