@@ -29,13 +29,12 @@ NOMBRE_SEASON = f"Season {ID_SEASON}"
 FECHA_ISO_CIERRE = FECHA_CIERRE.strftime("%Y-%m-%dT%H:%M:%S")
 
 # ==========================================
-# 2. ESCÁNER HISTÓRICO (SOLO SEASONS PASADAS)
+# 2. ESCÁNER HISTÓRICO (RÉCORDS Y MEDALLERO)
 # ==========================================
-def escanear_historial_cerrado():
+def escanear_historial_completo():
     stats_medallas = {}
     records_puntos = []
     
-    # SOLO escanea hasta ID_SEASON - 1
     for i in range(1, ID_SEASON): 
         archivo = f"Season_{i}.html"
         if os.path.exists(archivo):
@@ -44,25 +43,37 @@ def escanear_historial_cerrado():
                     contenido = f.read()
                     nombres = re.findall(r'<h[23][^>]*>(.*?)</h[23]>', contenido)
                     puntos_raw = re.findall(r'class="(?:points|pts)[^>]*>([\d,.]+)</', contenido)
+                    paises = re.findall(r'flagcdn\.com/w20/(..)\.png', contenido)
                     
+                    # 1. Procesar Medallero (Top 3 de cada archivo)
                     for idx, nombre in enumerate(nombres[:3]):
                         nom_limpio = nombre.strip().upper()
+                        pais_code = paises[idx] if idx < len(paises) else "un"
+                        
                         if nom_limpio not in stats_medallas:
-                            stats_medallas[nom_limpio] = {'oro': 0, 'plata': 0, 'bronce': 0}
+                            stats_medallas[nom_limpio] = {'oro': 0, 'plata': 0, 'bronce': 0, 'total': 0, 'pais': pais_code, 'display_name': nombre.strip()}
+                        
                         if idx == 0: stats_medallas[nom_limpio]['oro'] += 1
                         elif idx == 1: stats_medallas[nom_limpio]['plata'] += 1
                         elif idx == 2: stats_medallas[nom_limpio]['bronce'] += 1
+                        stats_medallas[nom_limpio]['total'] += 1
                     
+                    # 2. Procesar Récords Globales
                     for idx, p_str in enumerate(puntos_raw):
                         if idx < len(nombres):
                             val = int(p_str.replace(',', '').replace('.', ''))
-                            records_puntos.append({'pts': val, 'nom': nombres[idx].strip(), 's': i})
+                            pais_code = paises[idx] if idx < len(paises) else "un"
+                            records_puntos.append({'pts': val, 'nom': nombres[idx].strip(), 's': i, 'pais': pais_code})
             except: continue
             
     records_puntos.sort(key=lambda x: x['pts'], reverse=True)
-    return stats_medallas, records_puntos[:5]
+    
+    ranking_medallas = list(stats_medallas.values())
+    ranking_medallas.sort(key=lambda x: (x['total'], x['oro'], x['plata']), reverse=True)
+    
+    return stats_medallas, records_puntos[:5], ranking_medallas[:5]
 
-MEDALLERO_HISTORICO, TOP_5_RECORDS = escanear_historial_cerrado()
+MEDALLERO_DICT, TOP_5_RECORDS, TOP_5_DECORATED = escanear_historial_completo()
 
 # ==========================================
 # 3. API Y GENERACIÓN DE HTML
@@ -84,13 +95,36 @@ try:
 
         jugadores.sort(key=lambda x: x.get('battle_points', 0), reverse=True)
 
+        # HTML: Récords Históricos
         records_html = ""
+        colores_r = ["#ffd700", "#e5e5e5", "#cd7f32", "#4ade80", "#22d3ee"]
         for idx, rec in enumerate(TOP_5_RECORDS):
+            c = colores_r[idx] if idx < len(colores_r) else "#ffffff"
             records_html += f"""
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># {idx+1} RECORD (S-{rec['s']})</p>
-                <p class="text-xs font-black italic uppercase">{rec['nom']}</p>
-                <p class="points text-sm leading-none">{rec['pts']:,}</p>
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: {c}; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-{rec['s']} RECORD</p>
+                    <img src="https://flagcdn.com/w20/{rec['pais']}.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">{rec['nom']}</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">{rec['pts']:,}</p>
+            </div>"""
+
+        # HTML: Most Decorated
+        decorated_html = ""
+        for idx, dec in enumerate(TOP_5_DECORATED):
+            decorated_html += f"""
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/{dec['pais']}.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">{dec['display_name']}</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇{dec['oro']}</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈{dec['plata']}</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉{dec['bronce']}</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">{dec['total']} TOTAL PODIUMS</p>
             </div>"""
 
         html_content = f"""<!DOCTYPE html>
@@ -110,8 +144,8 @@ try:
         .b-plata {{ background: #e5e5e5; color: #000; }}
         .b-bronce {{ background: #cd7f32; color: #fff; }}
         .top-1 {{ background: linear-gradient(90deg, rgba(255, 215, 0, 0.25) 0%, rgba(255,255,255,0.1) 100%) !important; border-left: 4px solid #ffd700; }}
-        .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
         .no-scrollbar::-webkit-scrollbar {{ display: none; }}
+        .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
     </style>
 </head>
 <body class="p-2 md:p-10">
@@ -130,10 +164,18 @@ try:
             </div>
         </header>
 
-        <div class="mb-8">
-            <p class="text-[10px] font-black text-white/60 mb-3 px-2 italic tracking-widest">HALL OF FAME</p>
-            <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-2">
-                {records_html or '<p class="text-[10px] opacity-30">No historical records yet...</p>'}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 px-2">
+            <div>
+                <p class="text-[10px] font-black text-white/60 mb-3 italic tracking-widest uppercase">Hall of Fame (Best Scores)</p>
+                <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                    {records_html or '<p class="text-[10px] opacity-30">No records yet...</p>'}
+                </div>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-white/60 mb-3 italic tracking-widest uppercase">Most Decorated (Top 5 Counts)</p>
+                <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                    {decorated_html or '<p class="text-[10px] opacity-30">No medals yet...</p>'}
+                </div>
             </div>
         </div>
 
@@ -149,7 +191,7 @@ try:
             wr = (wins / btls * 100) if btls > 0 else 0
             pais = p.get('country', '??').lower()
             
-            h = MEDALLERO_HISTORICO.get(nombre_upper, {'oro': 0, 'plata': 0, 'bronce': 0})
+            h = MEDALLERO_DICT.get(nombre_upper, {'oro': 0, 'plata': 0, 'bronce': 0})
             badges = ""
             if h['oro'] > 0: badges += f'<span class="badge-mini b-oro">🥇{h["oro"]}</span>'
             if h['plata'] > 0: badges += f'<span class="badge-mini b-plata">🥈{h["plata"]}</span>'
