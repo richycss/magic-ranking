@@ -35,7 +35,7 @@ def escanear_historial_cerrado():
     stats_medallas = {}
     records_puntos = []
     
-    # SOLO escanea hasta ID_SEASON - 1 (Excluye la actual del Hall of Fame)
+    # SOLO escanea hasta ID_SEASON - 1
     for i in range(1, ID_SEASON): 
         archivo = f"Season_{i}.html"
         if os.path.exists(archivo):
@@ -45,7 +45,6 @@ def escanear_historial_cerrado():
                     nombres = re.findall(r'<h[23][^>]*>(.*?)</h[23]>', contenido)
                     puntos_raw = re.findall(r'class="(?:points|pts)[^>]*>([\d,.]+)</', contenido)
                     
-                    # Medallas solo de temporadas pasadas
                     for idx, nombre in enumerate(nombres[:3]):
                         nom_limpio = nombre.strip().upper()
                         if nom_limpio not in stats_medallas:
@@ -54,7 +53,6 @@ def escanear_historial_cerrado():
                         elif idx == 1: stats_medallas[nom_limpio]['plata'] += 1
                         elif idx == 2: stats_medallas[nom_limpio]['bronce'] += 1
                     
-                    # Récords solo de temporadas pasadas
                     for idx, p_str in enumerate(puntos_raw):
                         if idx < len(nombres):
                             val = int(p_str.replace(',', '').replace('.', ''))
@@ -111,8 +109,8 @@ try:
         .b-oro {{ background: #ffd700; color: #000; }}
         .b-plata {{ background: #e5e5e5; color: #000; }}
         .b-bronce {{ background: #cd7f32; color: #fff; }}
-        .admin-only-id {{ display: none; }}
         .top-1 {{ background: linear-gradient(90deg, rgba(255, 215, 0, 0.25) 0%, rgba(255,255,255,0.1) 100%) !important; border-left: 4px solid #ffd700; }}
+        .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
         .no-scrollbar::-webkit-scrollbar {{ display: none; }}
     </style>
 </head>
@@ -122,7 +120,7 @@ try:
             <div>
                 <p class="text-[10px] font-black uppercase tracking-widest text-cyan-200">MAGIC LEADERBOARD</p>
                 <div class="flex items-center gap-3">
-                    <h1 class="text-4xl md:text-6xl font-black italic uppercase italic">S-{ID_SEASON}</h1>
+                    <h1 class="text-4xl md:text-6xl font-black italic uppercase">S-{ID_SEASON}</h1>
                     <select id="seasonSelector" class="bg-black/40 border-none text-[10px] rounded text-white" onchange="if(this.value!='#') window.location.href=this.value"></select>
                 </div>
             </div>
@@ -151,19 +149,18 @@ try:
             wr = (wins / btls * 100) if btls > 0 else 0
             pais = p.get('country', '??').lower()
             
-            # Solo muestra copas si las ganó en seasons pasadas
             h = MEDALLERO_HISTORICO.get(nombre_upper, {'oro': 0, 'plata': 0, 'bronce': 0})
             badges = ""
             if h['oro'] > 0: badges += f'<span class="badge-mini b-oro">🥇{h["oro"]}</span>'
             if h['plata'] > 0: badges += f'<span class="badge-mini b-plata">🥈{h["plata"]}</span>'
             if h['bronce'] > 0: badges += f'<span class="badge-mini b-bronce">🥉{h["bronce"]}</span>'
 
-            row_class = f"top-{i}" if i == 1 else "glass"
+            row_class = "top-1" if i == 1 else "glass"
             icon = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else f"#{i}"
 
             html_content += f"""
             <div class="{row_class} rounded-xl flex flex-col md:flex-row items-center p-4 transition-all">
-                <div class="md:w-20 text-center text-2xl font-black italic text-white/40">{icon}</div>
+                <div class="md:w-16 text-center text-2xl font-black italic text-white/40">{icon}</div>
                 <div class="flex items-center gap-4 flex-1 w-full">
                     <img src="https://graph.facebook.com/{p.get('facebook_id')}/picture?type=large" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover" onerror="this.src='https://ui-avatars.com/api/?name={nombre}';">
                     <div class="min-w-0">
@@ -174,11 +171,18 @@ try:
                         <div class="flex">{badges}</div>
                     </div>
                 </div>
-                <div class="md:w-64 flex justify-between md:justify-center gap-6 w-full mt-2 md:mt-0">
-                    <div class="text-center"><p class="text-[8px] text-white/50 uppercase font-black">MATCHES</p><p class="text-xs font-bold">{btls}</p></div>
-                    <div class="text-center"><p class="text-[8px] text-green-400 uppercase font-black">WINS</p><p class="text-xs font-bold">{wins}</p></div>
-                    <div class="text-right flex-1 md:flex-none">
-                        <p class="text-[8px] text-cyan-300 uppercase font-black">SCORE</p>
+                <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
+                    <div class="flex gap-4 text-center">
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">{btls}</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">{wins}</p></div>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">{wr:.1f}%</span></div>
+                        <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: {wr}%"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
                         <p class="points text-xl md:text-2xl font-black italic text-cyan-400">{bp:,}</p>
                     </div>
                 </div>
