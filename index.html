@@ -15,8 +15,8 @@
         .b-plata { background: #e5e5e5; color: #000; }
         .b-bronce { background: #cd7f32; color: #fff; }
         .top-1 { background: linear-gradient(90deg, rgba(255, 215, 0, 0.25) 0%, rgba(255,255,255,0.1) 100%) !important; border-left: 4px solid #ffd700; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="p-2 md:p-10">
@@ -35,35 +35,118 @@
             </div>
         </header>
 
-        <div class="mb-8">
-            <p class="text-[10px] font-black text-white/60 mb-3 px-2 italic tracking-widest">HALL OF FAME</p>
-            <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-2">
-                
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># 1 RECORD (S-188)</p>
-                <p class="text-xs font-black italic uppercase">Veno Shivaheld</p>
-                <p class="points text-sm leading-none">300,190</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 px-2">
+            <div>
+                <p class="text-[10px] font-black text-white/60 mb-3 italic tracking-widest uppercase">Hall of Fame (Best Scores)</p>
+                <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                    
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: #ffd700; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-188 RECORD</p>
+                    <img src="https://flagcdn.com/w20/mx.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">Veno Shivaheld</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">300,190</p>
             </div>
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># 2 RECORD (S-191)</p>
-                <p class="text-xs font-black italic uppercase">Ash Ashenheart</p>
-                <p class="points text-sm leading-none">256,000</p>
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: #e5e5e5; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-191 RECORD</p>
+                    <img src="https://flagcdn.com/w20/fr.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">Ash Ashenheart</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">256,000</p>
             </div>
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># 3 RECORD (S-191)</p>
-                <p class="text-xs font-black italic uppercase">Cris Sel</p>
-                <p class="points text-sm leading-none">250,000</p>
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: #cd7f32; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-191 RECORD</p>
+                    <img src="https://flagcdn.com/w20/br.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">Cris Sel</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">250,000</p>
             </div>
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># 4 RECORD (S-188)</p>
-                <p class="text-xs font-black italic uppercase">Richy Carrera Silva</p>
-                <p class="points text-sm leading-none">205,730</p>
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: #4ade80; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-188 RECORD</p>
+                    <img src="https://flagcdn.com/w20/mx.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">Richy Carrera Silva</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">205,730</p>
             </div>
-            <div class="flex-none glass px-4 py-2 rounded-xl border-b-2 border-white/10">
-                <p class="text-[7px] font-bold text-cyan-300 uppercase tracking-tighter"># 5 RECORD (S-192)</p>
-                <p class="text-xs font-black italic uppercase">Gagan Naik</p>
-                <p class="points text-sm leading-none">200,200</p>
+            <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4" style="border-color: #22d3ee; min-width: 150px;">
+                <div class="flex justify-between items-start mb-1">
+                    <p class="text-[8px] font-black text-white/40">S-192 RECORD</p>
+                    <img src="https://flagcdn.com/w20/in.png" class="w-3 opacity-80">
+                </div>
+                <p class="text-xs font-black italic uppercase truncate">Gagan Naik</p>
+                <p class="points text-sm font-black text-cyan-400 leading-tight">200,200</p>
             </div>
+                </div>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-white/60 mb-3 italic tracking-widest uppercase">Most Decorated (Top 5 Counts)</p>
+                <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                    
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/in.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">Gagan Naik</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇3</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈0</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉0</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">3 TOTAL PODIUMS</p>
+            </div>
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/br.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">Cris Sel</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇0</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈1</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉1</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">2 TOTAL PODIUMS</p>
+            </div>
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/de.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">Doris Angelse</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇0</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈0</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉2</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">2 TOTAL PODIUMS</p>
+            </div>
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/mx.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">Veno Shivaheld</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇1</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈0</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉0</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">1 TOTAL PODIUMS</p>
+            </div>
+            <div class="flex-none bg-white/5 backdrop-blur-md px-4 py-3 rounded-xl border-b-2 border-white/10" style="min-width: 160px;">
+                <div class="flex items-center gap-2 mb-1">
+                    <img src="https://flagcdn.com/w20/fr.png" class="w-3">
+                    <p class="text-xs font-black italic uppercase truncate">Ash Ashenheart</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[10px] font-bold text-yellow-400">🥇1</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈0</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉0</span>
+                </div>
+                <p class="text-[7px] font-black text-white/30 mt-1 uppercase">1 TOTAL PODIUMS</p>
+            </div>
+                </div>
             </div>
         </div>
 
@@ -83,17 +166,17 @@
                 </div>
                 <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
                     <div class="flex gap-4 text-center">
-                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">460</p></div>
-                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">384</p></div>
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">462</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">386</p></div>
                     </div>
                     <div class="flex-1 w-full">
                         <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">83.5%</span></div>
                         <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 83.47826086956522%"></div>
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 83.54978354978356%"></div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">41,410</p>
+                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">41,610</p>
                     </div>
                 </div>
             </div>
@@ -195,17 +278,17 @@
                 </div>
                 <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
                     <div class="flex gap-4 text-center">
-                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">286</p></div>
-                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">247</p></div>
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">287</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">248</p></div>
                     </div>
                     <div class="flex-1 w-full">
                         <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">86.4%</span></div>
                         <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 86.36363636363636%"></div>
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 86.41114982578398%"></div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">26,330</p>
+                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">26,430</p>
                     </div>
                 </div>
             </div>
@@ -363,17 +446,17 @@
                 </div>
                 <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
                     <div class="flex gap-4 text-center">
-                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">213</p></div>
-                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">148</p></div>
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">219</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">151</p></div>
                     </div>
                     <div class="flex-1 w-full">
-                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">69.5%</span></div>
+                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">68.9%</span></div>
                         <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 69.48356807511738%"></div>
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 68.94977168949772%"></div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">16,950</p>
+                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">17,400</p>
                     </div>
                 </div>
             </div>
@@ -559,22 +642,50 @@
                 </div>
                 <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
                     <div class="flex gap-4 text-center">
-                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">237</p></div>
-                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">83</p></div>
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">239</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">85</p></div>
                     </div>
                     <div class="flex-1 w-full">
-                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">35.0%</span></div>
+                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">35.6%</span></div>
                         <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 35.0210970464135%"></div>
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 35.56485355648535%"></div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">13,420</p>
+                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">13,620</p>
                     </div>
                 </div>
             </div>
             <div class="glass rounded-xl flex flex-col md:flex-row items-center p-4 transition-all">
                 <div class="md:w-16 text-center text-2xl font-black italic text-white/40">#19</div>
+                <div class="flex items-center gap-4 flex-1 w-full">
+                    <img src="https://graph.facebook.com/552487551208140/picture?type=large" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Jake Gatinao';">
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-base md:text-xl font-black italic uppercase truncate">Jake Gatinao</h3>
+                            <img src="https://flagcdn.com/w20/ph.png" class="w-5 rounded-sm">
+                        </div>
+                        <div class="flex"></div>
+                    </div>
+                </div>
+                <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
+                    <div class="flex gap-4 text-center">
+                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">144</p></div>
+                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">127</p></div>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">88.2%</span></div>
+                        <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 88.19444444444444%"></div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">13,300</p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass rounded-xl flex flex-col md:flex-row items-center p-4 transition-all">
+                <div class="md:w-16 text-center text-2xl font-black italic text-white/40">#20</div>
                 <div class="flex items-center gap-4 flex-1 w-full">
                     <img src="https://graph.facebook.com/a_4948601380503154632/picture?type=large" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover" onerror="this.src='https://ui-avatars.com/api/?name=bokunchi';">
                     <div class="min-w-0">
@@ -598,34 +709,6 @@
                     </div>
                     <div class="text-right">
                         <p class="points text-xl md:text-2xl font-black italic text-cyan-400">12,720</p>
-                    </div>
-                </div>
-            </div>
-            <div class="glass rounded-xl flex flex-col md:flex-row items-center p-4 transition-all">
-                <div class="md:w-16 text-center text-2xl font-black italic text-white/40">#20</div>
-                <div class="flex items-center gap-4 flex-1 w-full">
-                    <img src="https://graph.facebook.com/552487551208140/picture?type=large" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Jake Gatinao';">
-                    <div class="min-w-0">
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-base md:text-xl font-black italic uppercase truncate">Jake Gatinao</h3>
-                            <img src="https://flagcdn.com/w20/ph.png" class="w-5 rounded-sm">
-                        </div>
-                        <div class="flex"></div>
-                    </div>
-                </div>
-                <div class="md:w-72 flex flex-col md:flex-row items-center gap-4 w-full mt-3 md:mt-0">
-                    <div class="flex gap-4 text-center">
-                        <div><p class="text-[7px] text-white/50 uppercase font-black">MATCHES</p><p class="text-[10px] font-bold">136</p></div>
-                        <div><p class="text-[7px] text-green-400 uppercase font-black">WINS</p><p class="text-[10px] font-bold">119</p></div>
-                    </div>
-                    <div class="flex-1 w-full">
-                        <div class="flex justify-between text-[7px] font-black mb-1"><span>WINRATE</span><span class="text-cyan-300">87.5%</span></div>
-                        <div class="w-full bg-black/30 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full" style="width: 87.5%"></div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="points text-xl md:text-2xl font-black italic text-cyan-400">12,500</p>
                     </div>
                 </div>
             </div>
