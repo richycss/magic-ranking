@@ -21,7 +21,7 @@ def calcular_info_season():
     num_seasons_completas = dias_desde_inicio // 14
     id_actual = SEASON_REF + num_seasons_completas
     fecha_inicio_esta_season = FECHA_INICIO_REF + timedelta(days=num_seasons_completas * 14)
-    # AJUSTE: Ahora termina exactamente a las 11:00 PM (23:00) del domingo
+    # AJUSTE: Termina a las 11:00 PM (23:00) del domingo
     fecha_final_esta_season = fecha_inicio_esta_season + timedelta(days=13, hours=23, minutes=0)
     return id_actual, fecha_final_esta_season
 
@@ -93,7 +93,7 @@ try:
 
         jugadores.sort(key=lambda x: x.get('battle_points', 0), reverse=True)
 
-        # HTML: Récords Históricos
+        # HTML: Récords Históricos (Nombres protegidos)
         records_html = ""
         colores_r = ["#ffd700", "#e5e5e5", "#cd7f32", "#4ade80", "#22d3ee"]
         for idx, rec in enumerate(TOP_5_RECORDS):
@@ -104,11 +104,11 @@ try:
                     <p class="text-[8px] font-black text-white/40 uppercase">S-{rec['s']} RECORD</p>
                     <img src="https://flagcdn.com/w20/{rec['pais']}.png" class="w-3 opacity-80">
                 </div>
-                <p class="text-xs font-black italic uppercase truncate">{rec['nom']}</p>
+                <p class="text-xs font-black italic uppercase truncate notranslate" translate="no">{rec['nom']}</p>
                 <p class="points text-sm font-black text-cyan-400 leading-tight">{rec['pts']:,}</p>
             </div>"""
 
-        # HTML: Seasons Ganadas
+        # HTML: Seasons Ganadas (Nombres protegidos)
         decorated_html = ""
         for idx, dec in enumerate(TOP_5_DECORATED):
             c = colores_r[idx] if idx < len(colores_r) else "#ffffff"
@@ -116,20 +116,21 @@ try:
             <div class="flex-none bg-black/40 backdrop-blur-md px-4 py-3 rounded-xl border-l-4 shadow-lg" style="border-color: {c}; min-width: 160px;">
                 <div class="flex items-center gap-2 mb-1 border-b border-white/10 pb-1">
                     <img src="https://flagcdn.com/w20/{dec['pais']}.png" class="w-3">
-                    <p class="text-xs font-black italic uppercase truncate">{dec['display_name']}</p>
+                    <p class="text-xs font-black italic uppercase truncate notranslate" translate="no">{dec['display_name']}</p>
                 </div>
                 <div class="flex gap-2">
-                    <span class="text-[10px] font-bold text-yellow-400">🥇{dec['oro']}</span>
-                    <span class="text-[10px] font-bold text-gray-300">🥈{dec['plata']}</span>
-                    <span class="text-[10px] font-bold text-orange-400">🥉{dec['bronce']}</span>
+                    <span class="text-[10px] font-bold text-yellow-400">🥇 {dec['oro']}</span>
+                    <span class="text-[10px] font-bold text-gray-300">🥈 {dec['plata']}</span>
+                    <span class="text-[10px] font-bold text-orange-400">🥉 {dec['bronce']}</span>
                 </div>
                 <p class="text-[7px] font-black text-cyan-200 mt-1 uppercase tracking-tighter">{dec['total']} TOTAL PODIUMS</p>
             </div>"""
 
         html_content = f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="notranslate" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ranking Leaderboard | {NOMBRE_SEASON}</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -210,7 +211,7 @@ try:
                         <img src="https://flagcdn.com/w40/{pais}.png" class="absolute -bottom-1 -right-1 w-6 h-4 rounded shadow-md border border-black/20">
                     </div>
                     <div class="min-w-0">
-                        <h3 class="text-lg md:text-xl font-black italic uppercase truncate text-white group-hover:text-cyan-400 transition-colors">{nombre}</h3>
+                        <h3 class="text-lg md:text-xl font-black italic uppercase truncate text-white group-hover:text-cyan-400 transition-colors notranslate" translate="no">{nombre}</h3>
                         <div class="flex mt-1 flex-wrap gap-y-1">{badges}</div>
                     </div>
                 </div>
