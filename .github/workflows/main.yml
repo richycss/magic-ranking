@@ -1,0 +1,4 @@
+- name: Ejecutar Script
+        env:
+          MAGIC_TOKEN: ${{ secrets.MAGIC_TOKEN }} # Esto inyecta el secreto
+        run: python main.py
