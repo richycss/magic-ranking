@@ -218,4 +218,3 @@ try:
         with open(f"Season_{ID_SEASON}.html", "w", encoding="utf-8") as f: f.write(html_content)
 
 except Exception as e: print(f"Error: {e}")
-s
