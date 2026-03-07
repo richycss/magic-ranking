@@ -21,7 +21,8 @@ def calcular_info_season():
     num_seasons_completas = dias_desde_inicio // 14
     id_actual = SEASON_REF + num_seasons_completas
     fecha_inicio_esta_season = FECHA_INICIO_REF + timedelta(days=num_seasons_completas * 14)
-    fecha_final_esta_season = fecha_inicio_esta_season + timedelta(days=13, hours=23, minutes=59)
+    # AJUSTE: Ahora termina exactamente a las 11:00 PM (23:00) del domingo
+    fecha_final_esta_season = fecha_inicio_esta_season + timedelta(days=13, hours=23, minutes=0)
     return id_actual, fecha_final_esta_season
 
 ID_SEASON, FECHA_CIERRE = calcular_info_season()
@@ -197,7 +198,6 @@ try:
             if h['bronce'] > 0: badges += f'<span class="badge-mini b-bronce">🥉 {h["bronce"]}</span>'
 
             row_class = "top-1" if i == 1 else "glass"
-            # Color del círculo de posición
             rank_color = "text-yellow-400" if i==1 else "text-slate-300" if i==2 else "text-orange-400" if i==3 else "text-white/20"
             icon = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else f"#{i}"
 
