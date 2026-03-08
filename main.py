@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 # ==========================================
 # 0. CONFIGURACIÓN DE SEGURIDAD
 # ==========================================
-TOKEN_API = os.getenv("MAGIC_TOKEN", "Mn1iiAAAAB1UI-aNNnM-7833")
+TOKEN_API = os.getenv("MAGIC_TOKEN")
 
 # ==========================================
 # 1. CONFIGURACIÓN DE SEASON
@@ -267,3 +267,4 @@ try:
         with open(f"Season_{ID_SEASON}.html", "w", encoding="utf-8") as f: f.write(html_content)
 
 except Exception as e: print(f"Error: {e}")
+
